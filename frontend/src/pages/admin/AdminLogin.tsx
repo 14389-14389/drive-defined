@@ -44,10 +44,10 @@ const AdminLogin: React.FC = () => {
           </div>
           <CardTitle className="text-2xl">AutoDrive Admin</CardTitle>
           <CardDescription>
-            Sign in to manage your vehicle inventory
+            
           </CardDescription>
           <p className="text-xs text-muted-foreground mt-2">
-            Demo: admin@autodrive.co.za / password123
+            
           </p>
         </CardHeader>
         <CardContent>
