@@ -103,9 +103,9 @@ const Contact = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 
-              </h1>
+              </h1>Contact us
               <p className="text-xl text-blue-100 mb-8">
-               contact us
+               
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button 
