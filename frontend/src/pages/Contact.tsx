@@ -102,7 +102,7 @@ const Contact = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Contact Us
+                
               </h1>
               <p className="text-xl text-blue-100 mb-8">
                 We're here to help with any questions you may have
@@ -186,7 +186,7 @@ const Contact = () => {
 
               {/* Contact Form */}
               <div>
-                <h2 className="text-2xl font-bold mb-4">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold mb-4">send us a message</h2>
                 <Card>
                   <CardContent className="p-6">
                     {submitStatus === 'success' && (
