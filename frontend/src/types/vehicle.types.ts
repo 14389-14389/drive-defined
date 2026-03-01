@@ -1,0 +1,42 @@
+export type FuelType = 'Petrol' | 'Diesel' | 'Electric' | 'Hybrid';
+export type Transmission = 'Automatic' | 'Manual';
+export type BodyType = 'SUV' | 'Sedan' | 'Hatchback' | 'Coupe' | 'Convertible' | 'Bakkie' | 'Performance' | 'Executive';
+export type Condition = 'Excellent' | 'Very Good' | 'Good';
+export type ServiceHistory = 'Full' | 'Partial' | 'None';
+export type VehicleStatus = 'available' | 'sold' | 'reserved';
+
+export interface Vehicle {
+  id: string;
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType: FuelType;
+  transmission: Transmission;
+  bodyType: BodyType;
+  color: string;
+  exteriorColor: string;
+  interiorColor: string;
+  engineSize: string;
+  power: string;
+  topSpeed?: string;
+  acceleration?: string;
+  images: string[];
+  description: string;
+  features: string[];
+  safetyFeatures: string[];
+  comfortFeatures: string[];
+  location: string;
+  registrationYear: number;
+  previousOwners: number;
+  serviceHistory: ServiceHistory;
+  condition: Condition;
+  stockNumber: string;
+  vin: string;
+  isFeatured?: boolean;
+  isNewArrival?: boolean;
+  hasSpecialOffer?: boolean;
+  specialOfferPrice?: number;
+  status?: VehicleStatus;
+}
