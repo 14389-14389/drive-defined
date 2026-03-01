@@ -66,7 +66,7 @@ const AdminLogin: React.FC = () => {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="admin@autodrive.co.za"
+                  placeholder="admin"
                   className="pl-10"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
