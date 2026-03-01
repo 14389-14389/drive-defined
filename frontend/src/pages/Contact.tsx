@@ -162,7 +162,7 @@ const Contact = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Map */}
               <div>
-                <h2 className="text-2xl font-bold mb-4">Visit Our Showroom</h2>
+                <h2 className="text-2xl font-bold mb-4">come to our showroom</h2>
                 <div className="bg-gray-200 rounded-lg overflow-hidden h-[400px] relative">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8462962765316!2d36.781315!3d-1.292066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f109dc7ffb229%3A0x8f5c6b5c5b5b5b5b!2sABC%20Place%20Nairobi!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
