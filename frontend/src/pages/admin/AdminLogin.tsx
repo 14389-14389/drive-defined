@@ -31,7 +31,7 @@ const AdminLogin: React.FC = () => {
     if (success) {
       navigate("/admin");
     } else {
-      setError("Invalid email or password. Try admin@autodrive.co.za / password123");
+      setError("Invalid email or password.");
     }
   };
 
