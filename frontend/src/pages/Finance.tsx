@@ -127,7 +127,7 @@ const Finance = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="h-5 w-5 text-blue-900" />
-                    Quick Approval
+                  
                   </CardTitle>
                   <CardDescription>
                     Get pre-approved in minutes
@@ -139,7 +139,7 @@ const Finance = () => {
                       <CheckCircle className="h-5 w-5 text-green-600 mt-0.5" />
                       <div>
                         <h3 className="font-semibold text-green-800">95% Approval Rate</h3>
-                        <p className="text-sm text-green-700">Most applications approved within 24 hours</p>
+                        <p className="text-sm text-red-700">Most applications approved within 24 hours</p>
                       </div>
                     </div>
                   </div>
