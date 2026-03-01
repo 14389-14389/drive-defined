@@ -65,8 +65,8 @@ const AdminLayout: React.FC = () => {
         />
         <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-xl">
           <div className="flex h-16 items-center gap-2 px-6 border-b">
-            <Car className="h-6 w-6 text-blue-600" />
-            <span className="text-lg font-bold text-gray-900">AutoDrive Admin</span>
+            <Car className="h-6 w-6 text-white-600" />
+            <span className="text-lg font-bold text-gray-900">Admin</span>
           </div>
           <nav className="mt-6 px-3">
             {navigation.map((item) => {
@@ -103,7 +103,7 @@ const AdminLayout: React.FC = () => {
         <div className="flex flex-col flex-1 min-h-0 bg-white border-r">
           <div className="flex h-16 items-center gap-2 px-6 border-b">
             <Car className="h-6 w-6 text-blue-600" />
-            <span className="text-lg font-bold text-gray-900">AutoDrive Admin</span>
+            <span className="text-lg font-bold text-gray-900"> Admin</span>
           </div>
           <nav className="flex-1 px-3 py-4 space-y-1">
             {navigation.map((item) => {
