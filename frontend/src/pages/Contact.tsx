@@ -29,7 +29,7 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // Simulate form submission (replace with actual API call)
     setTimeout(() => {
       setSubmitStatus('success');
       setIsSubmitting(false);
@@ -38,6 +38,12 @@ const Contact = () => {
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000);
     }, 1500);
+  };
+
+  const openWhatsApp = (message: string) => {
+    const phone = "254726894129";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
   };
 
   const contactInfo = [
@@ -67,6 +73,25 @@ const Contact = () => {
     }
   ];
 
+  const faqs = [
+    {
+      q: "What are your showroom hours?",
+      a: "We're open Monday to Friday from 8:00 AM to 6:00 PM, and Saturdays from 9:00 AM to 4:00 PM. We're closed on Sundays."
+    },
+    {
+      q: "Do I need an appointment for a test drive?",
+      a: "While walk-ins are welcome, we recommend booking an appointment to ensure your preferred vehicle is available and ready."
+    },
+    {
+      q: "Do you offer financing?",
+      a: "Yes! We work with major Kenyan banks including KCB, Equity, and Cooperative Bank to offer competitive financing options."
+    },
+    {
+      q: "Can I trade in my current vehicle?",
+      a: "Absolutely! We accept trade-ins and offer fair market value for your current vehicle."
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -83,10 +108,19 @@ const Contact = () => {
                 We're here to help with any questions you may have
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-blue-900 hover:bg-gray-100"
+                  onClick={() => window.location.href = 'tel:+254726894129'}
+                >
                   Call Us Now
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white/10"
+                  onClick={() => openWhatsApp("Hi, I have a question about your vehicles.")}
+                >
                   WhatsApp Us
                 </Button>
               </div>
@@ -130,7 +164,6 @@ const Contact = () => {
               <div>
                 <h2 className="text-2xl font-bold mb-4">Visit Our Showroom</h2>
                 <div className="bg-gray-200 rounded-lg overflow-hidden h-[400px] relative">
-                  {/* Google Maps iframe - Nairobi location */}
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8462962765316!2d36.781315!3d-1.292066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f109dc7ffb229%3A0x8f5c6b5c5b5b5b5b!2sABC%20Place%20Nairobi!5e0!3m2!1sen!2ske!4v1620000000000!5m2!1sen!2ske"
                     width="100%"
@@ -249,27 +282,15 @@ const Contact = () => {
           <div className="container mx-auto px-4 max-w-3xl">
             <h2 className="text-2xl font-bold text-center mb-8">Frequently Asked Questions</h2>
             <div className="space-y-4">
-              {[
-                {
-                  q: "What are your showroom hours?",
-                  a: "We're open Monday to Friday from 8:00 AM to 6:00 PM, and Saturdays from 9:00 AM to 4:00 PM. We're closed on Sundays."
-                },
-                {
-                  q: "Do I need an appointment for a test drive?",
-                  a: "While walk-ins are welcome, we recommend booking an appointment to ensure your preferred vehicle is available and ready."
-                },
-                {
-                  q: "Do you offer financing?",
-                  a: "Yes! We work with major Kenyan banks including KCB, Equity, and Cooperative Bank to offer competitive financing options."
-                },
-                {
-                  q: "Can I trade in my current vehicle?",
-                  a: "Absolutely! We accept trade-ins and offer fair market value for your current vehicle."
-                }
-              ].map((faq, index) => (
+              {faqs.map((faq, index) => (
                 <Card key={index}>
                   <CardContent className="p-4">
-                    <h3 className="font-semibold mb-2">{faq.q}</h3>
+                    <h3 
+                      className="font-semibold mb-2 cursor-pointer hover:text-blue-900 transition-colors"
+                      onClick={() => openWhatsApp(`Hi, I have a question: ${faq.q}`)}
+                    >
+                      {faq.q} <span className="text-sm text-blue-600 ml-2">(click to ask via WhatsApp)</span>
+                    </h3>
                     <p className="text-sm text-gray-600">{faq.a}</p>
                   </CardContent>
                 </Card>
