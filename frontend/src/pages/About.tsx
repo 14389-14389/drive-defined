@@ -210,7 +210,7 @@ const About = () => {
                 Meet The Team
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-                Our Leadership
+                
               </h2>
               <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
                 Dedicated professionals committed to your satisfaction
