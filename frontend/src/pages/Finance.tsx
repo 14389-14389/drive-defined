@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Calculator, Percent, Clock, Shield, CheckCircle, ArrowRight, Phone, Mail, Calendar } from 'lucide-react';
 
 const Finance = () => {
+  // Calculator state
+  const [vehiclePrice, setVehiclePrice] = useState('');
+  const [deposit, setDeposit] = useState('');
+  const [interestRate, setInterestRate] = useState('');
+  const [loanTerm, setLoanTerm] = useState('');
+  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
+
   const financeOptions = [
     {
       title: "Hire Purchase",
@@ -44,11 +51,34 @@ const Finance = () => {
   ];
 
   const calculators = [
-    { label: "Vehicle Price", placeholder: "e.g., 2,500,000" },
-    { label: "Deposit", placeholder: "e.g., 250,000" },
-    { label: "Interest Rate (%)", placeholder: "e.g., 13" },
-    { label: "Loan Term (months)", placeholder: "e.g., 60" }
+    { label: "Vehicle Price", placeholder: "e.g., 2,500,000", state: vehiclePrice, setState: setVehiclePrice },
+    { label: "Deposit", placeholder: "e.g., 250,000", state: deposit, setState: setDeposit },
+    { label: "Interest Rate (%)", placeholder: "e.g., 13", state: interestRate, setState: setInterestRate },
+    { label: "Loan Term (months)", placeholder: "e.g., 60", state: loanTerm, setState: setLoanTerm }
   ];
+
+  const calculatePayment = () => {
+    const price = parseFloat(vehiclePrice.replace(/,/g, ''));
+    const depositAmt = parseFloat(deposit.replace(/,/g, ''));
+    const rate = parseFloat(interestRate) / 100 / 12; // monthly interest rate
+    const term = parseFloat(loanTerm);
+
+    if (isNaN(price) || isNaN(depositAmt) || isNaN(rate) || isNaN(term) || term <= 0) {
+      alert('Please enter valid numbers in all fields.');
+      return;
+    }
+
+    const loanAmount = price - depositAmt;
+    if (loanAmount <= 0) {
+      alert('Deposit must be less than vehicle price.');
+      return;
+    }
+
+    // Monthly payment formula: P * r * (1+r)^n / ((1+r)^n - 1)
+    const x = Math.pow(1 + rate, term);
+    const monthly = loanAmount * rate * x / (x - 1);
+    setMonthlyPayment(monthly);
+  };
 
   const openWhatsApp = (message: string) => {
     const phone = "254726894129";
@@ -66,7 +96,7 @@ const Finance = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
-                Finance Options
+               
               </h1>
               <p className="text-xl text-blue-100 mb-8">
                 Flexible financing solutions tailored to your budget
@@ -99,7 +129,7 @@ const Finance = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Calculator className="h-5 w-5 text-blue-900" />
-                    Payment Calculator
+              
                   </CardTitle>
                   <CardDescription>
                     Estimate your monthly payments
@@ -112,13 +142,29 @@ const Finance = () => {
                       <input
                         type="text"
                         placeholder={field.placeholder}
+                        value={field.state}
+                        onChange={(e) => field.setState(e.target.value)}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-900/20"
                       />
                     </div>
                   ))}
-                  <Button className="w-full bg-blue-900 hover:bg-blue-800">
+                  <Button 
+                    className="w-full bg-blue-900 hover:bg-blue-800"
+                    onClick={calculatePayment}
+                  >
                     Calculate
                   </Button>
+                  {monthlyPayment !== null && (
+                    <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+                      <p className="text-sm text-gray-600">Estimated Monthly Payment:</p>
+                      <p className="text-2xl font-bold text-blue-900">
+                        KES {monthlyPayment.toFixed(0).toLocaleString()}
+                      </p>
+                      <p className="text-xs text-gray-500 mt-1">
+                        *Approximate, actual rates may vary
+                      </p>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
@@ -176,7 +222,7 @@ const Finance = () => {
         {/* Finance Options */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-4">Finance Options</h2>
+            <h2 className="text-3xl font-bold text-center mb-4"></h2>
             <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
               Choose the financing option that works best for you
             </p>
@@ -229,7 +275,7 @@ const Finance = () => {
                 <Card>
                   <CardContent className="pt-6">
                     <p className="text-center text-gray-600">
-                      Business finance options coming soon. Please contact our team for custom quotes.
+                    
                     </p>
                   </CardContent>
                 </Card>
@@ -241,7 +287,7 @@ const Finance = () => {
         {/* Partner Banks */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-4">Our Partner Banks</h2>
+            <h2 className="text-3xl font-bold text-center mb-4"></h2>
             <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
               We work with Kenya's leading financial institutions
             </p>
@@ -260,7 +306,7 @@ const Finance = () => {
         {/* CTA Section */}
         <section className="py-16 bg-blue-900 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+            <h2 className="text-3xl font-bold mb-4"></h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               Our finance experts are here to help you find the best option
             </p>
@@ -277,7 +323,7 @@ const Finance = () => {
                 size="lg" 
                 variant="outline" 
                 className="border-white text-white hover:bg-white/10"
-                onClick={() => openWhatsApp("Hi, I'm interested in financing options.")}
+                onClick={() => window.location.href = 'mailto:finance@autodrive.co.ke'}
               >
                 <Mail className="mr-2 h-5 w-5" />
                 finance@autodrive.co.ke
