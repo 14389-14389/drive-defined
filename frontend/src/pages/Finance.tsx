@@ -50,6 +50,12 @@ const Finance = () => {
     { label: "Loan Term (months)", placeholder: "e.g., 60" }
   ];
 
+  const openWhatsApp = (message: string) => {
+    const phone = "254726894129";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -70,7 +76,12 @@ const Finance = () => {
                   <Calculator className="mr-2 h-5 w-5" />
                   Calculate Payments
                 </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white/10"
+                  onClick={() => openWhatsApp("Hi, I'd like to speak with a finance expert about vehicle financing options.")}
+                >
                   <Phone className="mr-2 h-5 w-5" />
                   Talk to an Expert
                 </Button>
@@ -148,7 +159,11 @@ const Finance = () => {
                     </div>
                   </div>
 
-                  <Button variant="outline" className="w-full">
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => openWhatsApp("Hi, I'd like to apply for financing for a vehicle.")}
+                  >
                     Apply Now
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -250,11 +265,20 @@ const Finance = () => {
               Our finance experts are here to help you find the best option
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
+              <Button 
+                size="lg" 
+                className="bg-white text-blue-900 hover:bg-gray-100"
+                onClick={() => openWhatsApp("Hi, I'd like to speak with a finance expert.")}
+              >
                 <Phone className="mr-2 h-5 w-5" />
                 Call 0726 894 129
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white text-white hover:bg-white/10"
+                onClick={() => openWhatsApp("Hi, I'm interested in financing options.")}
+              >
                 <Mail className="mr-2 h-5 w-5" />
                 finance@autodrive.co.ke
               </Button>
