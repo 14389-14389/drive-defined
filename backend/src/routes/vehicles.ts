@@ -1,10 +1,10 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import { Vehicle } from '../models/Vehicle.js';
 
 const router = express.Router();
 
 // GET all available vehicles
-router.get('/', async (req, res) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const vehicles = await Vehicle.find({ status: 'available' })
       .sort({ createdAt: -1 });
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET featured vehicles
-router.get('/featured', async (req, res) => {
+router.get('/featured', async (req: Request, res: Response) => {
   try {
     const vehicles = await Vehicle.find({ 
       isFeatured: true, 
@@ -33,7 +33,7 @@ router.get('/featured', async (req, res) => {
 });
 
 // GET single vehicle by ID
-router.get('/:id', async (req, res) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
     const vehicle = await Vehicle.findById(req.params.id);
     
@@ -48,8 +48,8 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST create new vehicle (admin only)
-router.post('/', async (req, res) => {
+// POST create new vehicle
+router.post('/', async (req: Request, res: Response) => {
   try {
     const vehicle = new Vehicle(req.body);
     await vehicle.save();
@@ -60,8 +60,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT update vehicle (admin only)
-router.put('/:id', async (req, res) => {
+// PUT update vehicle
+router.put('/:id', async (req: Request, res: Response) => {
   try {
     const vehicle = await Vehicle.findByIdAndUpdate(
       req.params.id,
@@ -80,8 +80,8 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// DELETE vehicle (admin only)
-router.delete('/:id', async (req, res) => {
+// DELETE vehicle
+router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const vehicle = await Vehicle.findByIdAndDelete(req.params.id);
     

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -17,7 +17,9 @@ connectDB();
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: ['http://localhost:8080', 'http://localhost:5173'],
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://drive-defined.vercel.app'] 
+    : ['http://localhost:8080', 'http://localhost:5173'],
   credentials: true,
 }));
 app.use(express.json());
@@ -27,11 +29,26 @@ app.use(morgan('dev'));
 app.use('/api/vehicles', vehicleRoutes);
 
 // Health check
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV
+    environment: process.env.NODE_ENV || 'development',
+    mongodb: 'connected' 
+  });
+});
+
+// Root route
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    message: 'AutoDrive Kenya API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      vehicles: '/api/vehicles',
+      featured: '/api/vehicles/featured',
+      vehicleById: '/api/vehicles/:id'
+    }
   });
 });
 
@@ -43,6 +60,7 @@ app.listen(PORT, () => {
   console.log(`   GET  /api/vehicles`);
   console.log(`   GET  /api/vehicles/featured`);
   console.log(`   GET  /api/vehicles/:id`);
+  console.log(`   GET  /`);
 });
 
 export default app;

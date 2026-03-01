@@ -1,6 +1,7 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-export interface IVehicle extends Document {
+// Define the interface for the vehicle data (without extending Document)
+export interface IVehicle {
   stockNumber: string;
   make: string;
   model: string;
@@ -10,18 +11,17 @@ export interface IVehicle extends Document {
   fuelType: string;
   transmission: string;
   bodyType: string;
-  color?: string;  // Made optional with ?
+  color?: string;
   description: string;
   features: string[];
-  images: string[];  // Array of image URLs (up to 10)
+  images: string[];
   isFeatured: boolean;
   status: 'available' | 'sold' | 'reserved';
   location?: string;
   previousOwners?: number;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
+// Create the schema
 const VehicleSchema = new Schema<IVehicle>({
   stockNumber: { 
     type: String, 
@@ -61,8 +61,8 @@ const VehicleSchema = new Schema<IVehicle>({
     required: true 
   },
   color: { 
-    type: String, 
-    required: false  // Changed from required: true to required: false
+    type: String,
+    required: false
   },
   description: { 
     type: String, 
@@ -95,10 +95,11 @@ const VehicleSchema = new Schema<IVehicle>({
   timestamps: true
 });
 
-// Create indexes for better query performance
+// Create indexes
 VehicleSchema.index({ make: 1, model: 1 });
 VehicleSchema.index({ price: 1 });
 VehicleSchema.index({ status: 1 });
 VehicleSchema.index({ isFeatured: 1 });
 
+// Create and export the model
 export const Vehicle = mongoose.model<IVehicle>('Vehicle', VehicleSchema);
