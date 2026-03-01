@@ -79,7 +79,7 @@ const About = () => {
                 About AutoDrive Kenya
               </h1>
               <p className="text-xl text-blue-100 mb-8">
-                Your trusted partner in finding the perfect vehicle since 2020
+               
               </p>
               <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
                 Talk to Our Team
