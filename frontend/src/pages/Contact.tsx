@@ -105,7 +105,7 @@ const Contact = () => {
                 
               </h1>
               <p className="text-xl text-blue-100 mb-8">
-                We're here to help with any questions you may have
+               contact us
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button 
@@ -113,7 +113,7 @@ const Contact = () => {
                   className="bg-white text-blue-900 hover:bg-gray-100"
                   onClick={() => window.location.href = 'tel:+254726894129'}
                 >
-                  Call Us Now
+                  call us now
                 </Button>
                 <Button 
                   size="lg" 
