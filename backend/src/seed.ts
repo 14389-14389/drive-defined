@@ -8,8 +8,12 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 if (!MONGODB_URI) {
   console.error('❌ MONGODB_URI is not defined in .env file');
+  console.error('Please set MONGODB_URI environment variable');
   process.exit(1);
 }
+
+// Tell TypeScript that MONGODB_URI is definitely a string here
+const uri: string = MONGODB_URI;
 
 const sampleVehicles = [
   {
@@ -27,7 +31,9 @@ const sampleVehicles = [
     features: ['Panoramic Roof', 'Air Suspension', 'Sport Chrono Package', 'BOSE Sound System'],
     images: ['https://images.unsplash.com/photo-1580273916550-e323be2ae537'],
     isFeatured: true,
-    status: 'available'
+    status: 'available',
+    location: 'Nairobi Showroom',
+    previousOwners: 1
   },
   {
     stockNumber: 'BM002',
@@ -44,7 +50,9 @@ const sampleVehicles = [
     features: ['Laserlights', 'Sky Lounge Roof', 'Bowers & Wilkins Sound', 'Rear Entertainment'],
     images: ['https://images.unsplash.com/photo-1549317661-bd32c8ce0db2'],
     isFeatured: true,
-    status: 'available'
+    status: 'available',
+    location: 'Nairobi Showroom',
+    previousOwners: 1
   },
   {
     stockNumber: 'MB003',
@@ -61,37 +69,41 @@ const sampleVehicles = [
     features: ['AMG Line', 'MBUX Interior Assistant', 'Energizing Package', 'Burmester Sound'],
     images: ['https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2'],
     isFeatured: false,
-    status: 'available'
+    status: 'available',
+    location: 'Nairobi Showroom',
+    previousOwners: 1
   }
 ];
 
 async function seed() {
   try {
-    console.log('📦 Connecting to MongoDB Atlas...');
-    await mongoose.connect(MONGODB_URI);
-    console.log('✅ Connected to MongoDB Atlas');
+    console.log('Connecting to MongoDB Atlas...');
+    console.log('URI:', uri.replace(/:[^:]*@/, ':****@'));
+    
+    await mongoose.connect(uri);
+    console.log('Connected to MongoDB Atlas');
 
     // Clear existing vehicles
-    console.log('🗑️  Clearing existing vehicles...');
+    console.log(' Clearing existing vehicles...');
     await Vehicle.deleteMany({});
-    console.log('✅ Cleared existing vehicles');
+    console.log(' Cleared existing vehicles');
 
     // Insert sample vehicles
-    console.log('📝 Inserting sample vehicles...');
+    console.log('Inserting sample vehicles...');
     const vehicles = await Vehicle.insertMany(sampleVehicles);
-    console.log(`✅ Added ${vehicles.length} sample vehicles`);
+    console.log(` Added ${vehicles.length} sample vehicles`);
 
-    console.log('\n📋 Sample vehicles added:');
+    console.log('\n Sample vehicles added:');
     vehicles.forEach(v => {
-      console.log(`   - ${v.year} ${v.make} ${v.model} (${v.stockNumber}) - R ${v.price.toLocaleString()}`);
+      console.log(`   - ${v.year} ${v.make} ${v.model} (${v.stockNumber})`);
     });
 
-    console.log('\n🎉 Database seeded successfully!');
+    console.log('\n Database seeded successfully!');
     await mongoose.disconnect();
-    console.log('✅ Disconnected from MongoDB');
+    console.log(' Disconnected from MongoDB');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Seed failed:', error);
+    console.error('Seed failed:', error);
     process.exit(1);
   }
 }
