@@ -52,7 +52,7 @@ const AdminLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Mobile sidebar */}
+      {/* Mobile sidebar overlay */}
       <div
         className={cn(
           "fixed inset-0 z-50 lg:hidden",
@@ -65,7 +65,7 @@ const AdminLayout: React.FC = () => {
         />
         <div className="fixed inset-y-0 left-0 w-64 bg-white shadow-xl">
           <div className="flex h-16 items-center gap-2 px-6 border-b">
-            <Car className="h-6 w-6 text-white-600" />
+            <Car className="h-6 w-6 text-blue-600" />
             <span className="text-lg font-bold text-gray-900">Admin</span>
           </div>
           <nav className="mt-6 px-3">
@@ -80,7 +80,7 @@ const AdminLayout: React.FC = () => {
                     setSidebarOpen(false);
                   }}
                   className={cn(
-                    "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    "flex w-full items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium transition-colors",
                     isActive
                       ? "bg-blue-50 text-blue-700"
                       : "text-gray-700 hover:bg-gray-100"
@@ -103,7 +103,7 @@ const AdminLayout: React.FC = () => {
         <div className="flex flex-col flex-1 min-h-0 bg-white border-r">
           <div className="flex h-16 items-center gap-2 px-6 border-b">
             <Car className="h-6 w-6 text-blue-600" />
-            <span className="text-lg font-bold text-gray-900"> Admin</span>
+            <span className="text-lg font-bold text-gray-900">Admin</span>
           </div>
           <nav className="flex-1 px-3 py-4 space-y-1">
             {navigation.map((item) => {
@@ -156,15 +156,15 @@ const AdminLayout: React.FC = () => {
 
             <div className="flex-1" />
 
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative">
+            <div className="flex items-center gap-2 sm:gap-4">
+              <Button variant="ghost" size="icon" className="relative h-10 w-10">
                 <Bell className="h-5 w-5" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-600 rounded-full" />
               </Button>
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2">
+                  <Button variant="ghost" className="flex items-center gap-2 px-2 sm:px-3">
                     <Avatar className="h-8 w-8">
                       <AvatarFallback className="bg-blue-100 text-blue-700">
                         {currentUser && getInitials(currentUser.name)}
@@ -184,11 +184,11 @@ const AdminLayout: React.FC = () => {
                 <DropdownMenuContent align="end" className="w-56">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => navigate("/admin/settings")}>
+                  <DropdownMenuItem onClick={() => navigate("/admin/settings")} className="cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
                     <span>Settings</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout}>
+                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
                     <LogOut className="mr-2 h-4 w-4" />
                     <span>Logout</span>
                   </DropdownMenuItem>
@@ -199,7 +199,7 @@ const AdminLayout: React.FC = () => {
         </header>
 
         {/* Page content */}
-        <main className="p-6">
+        <main className="p-4 sm:p-6">
           <Outlet />
         </main>
       </div>

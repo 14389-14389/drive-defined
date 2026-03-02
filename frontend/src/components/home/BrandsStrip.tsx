@@ -10,12 +10,12 @@ const brands = [
 ];
 
 const BrandsStrip = () => (
-  <section className="py-16 bg-secondary">
+  <section className="py-12 sm:py-16 bg-secondary">
     <div className="container mx-auto px-4">
-      <p className="text-center text-muted-foreground font-heading text-sm uppercase tracking-wider mb-8">
+      <p className="text-center text-muted-foreground font-heading text-sm uppercase tracking-wider mb-6 sm:mb-8">
         Brands We Stock
       </p>
-      <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14">
+      <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-14">
         {brands.map((brand, i) => (
           <motion.div
             key={brand.name}
@@ -23,7 +23,7 @@ const BrandsStrip = () => (
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="text-foreground/30 hover:text-accent font-heading font-extrabold text-xl sm:text-2xl tracking-widest transition-colors cursor-default select-none"
+            className="text-foreground/30 hover:text-accent font-heading font-extrabold text-lg sm:text-xl lg:text-2xl tracking-widest transition-colors cursor-default select-none"
           >
             {brand.letters}
           </motion.div>

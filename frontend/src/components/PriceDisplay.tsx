@@ -9,16 +9,16 @@ interface PriceDisplayProps {
 }
 
 const PriceDisplay: React.FC<PriceDisplayProps> = ({ price, className, size = 'md' }) => {
-  const { convertPrice, currency } = useCurrency();
+  const { convertPrice } = useCurrency();
   
   const sizeClasses = {
-    sm: 'text-lg',
-    md: 'text-2xl',
-    lg: 'text-3xl'
+    sm: 'text-base sm:text-lg',
+    md: 'text-xl sm:text-2xl',
+    lg: 'text-2xl sm:text-3xl'
   };
 
   return (
-    <div>
+    <div className="break-words">
       <p className={cn('font-bold text-blue-900', sizeClasses[size], className)}>
         {convertPrice(price)}
       </p>

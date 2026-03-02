@@ -34,7 +34,6 @@ const HeroSection = () => {
     }
     
     if (budget && budget !== "any") {
-      // Extract max price from budget range
       const budgetValue = budget.split('-')[1];
       if (budgetValue) {
         params.set("maxPrice", budgetValue);
@@ -50,32 +49,31 @@ const HeroSection = () => {
     }
   };
 
-  // Add "Any" option to makes and bodyTypes
   const allMakes = ["any", ...makes];
   const allBodyTypes = ["any", ...bodyTypes];
 
   return (
-    <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden px-4 sm:px-6">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       />
       
-      {/* Subtle gradient overlay for better text visibility */}
+      {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60" />
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto text-center w-full max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-7xl text-white mb-4 leading-tight drop-shadow-lg">
+          <h1 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white mb-3 sm:mb-4 leading-tight drop-shadow-lg">
             Find Your{" "}
             <span className="text-yellow-400">Perfect Drive</span>
           </h1>
-          <p className="text-white/95 text-lg sm:text-xl max-w-2xl mx-auto mb-10 font-body drop-shadow">
+          <p className="text-white/95 text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 font-body drop-shadow px-2">
             Browse our handpicked collection of premium certified vehicles
           </p>
         </motion.div>
@@ -84,11 +82,11 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="bg-white/95 backdrop-blur-sm rounded-xl p-6 max-w-4xl mx-auto shadow-2xl"
+          className="bg-white/95 backdrop-blur-sm rounded-xl p-4 sm:p-6 max-w-4xl mx-auto shadow-2xl"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             <Select value={make} onValueChange={setMake}>
-              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white">
+              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white w-full">
                 <SelectValue placeholder="Select Make" />
               </SelectTrigger>
               <SelectContent>
@@ -101,7 +99,7 @@ const HeroSection = () => {
             </Select>
 
             <Select value={bodyType} onValueChange={setBodyType}>
-              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white">
+              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white w-full">
                 <SelectValue placeholder="Select Body Type" />
               </SelectTrigger>
               <SelectContent>
@@ -114,7 +112,7 @@ const HeroSection = () => {
             </Select>
 
             <Select value={budget} onValueChange={setBudget}>
-              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white">
+              <SelectTrigger className="h-12 font-heading text-sm border-gray-200 bg-white w-full">
                 <SelectValue placeholder="Select Budget" />
               </SelectTrigger>
               <SelectContent>
@@ -128,37 +126,36 @@ const HeroSection = () => {
 
             <Button
               onClick={handleSearch}
-              className="h-12 bg-blue-900 hover:bg-blue-800 text-white font-heading font-bold text-sm transition-all duration-300 hover:scale-105"
+              className="h-12 bg-blue-900 hover:bg-blue-800 text-white font-heading font-bold text-sm transition-all duration-300 hover:scale-105 w-full"
             >
               <Search className="w-4 h-4 mr-2" />
               Search Vehicles
             </Button>
           </div>
           
-          {/* Quick search tips */}
-          <div className="mt-4 text-sm text-gray-600">
-            <p>Popular searches: 
-              <button 
-                onClick={() => { setMake("Porsche"); setBodyType("any"); setBudget("any"); handleSearch(); }} 
-                className="text-blue-900 hover:text-blue-700 hover:underline mx-1 font-medium"
-              >
-                Porsche
-              </button> 
-              • 
-              <button 
-                onClick={() => { setMake("any"); setBodyType("SUV"); setBudget("any"); handleSearch(); }} 
-                className="text-blue-900 hover:text-blue-700 hover:underline mx-1 font-medium"
-              >
-                SUV
-              </button> 
-              • 
-              <button 
-                onClick={() => { setMake("any"); setBodyType("any"); setBudget("1500000-2000000"); handleSearch(); }} 
-                className="text-blue-900 hover:text-blue-700 hover:underline mx-1 font-medium"
-              >
-                ksh 500k - ksh 10M
-              </button>
-            </p>
+          {/* Quick search tips - now with better wrapping */}
+          <div className="mt-4 text-xs sm:text-sm text-gray-600 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <span className="whitespace-nowrap">Popular searches:</span>
+            <button 
+              onClick={() => { setMake("Porsche"); setBodyType("any"); setBudget("any"); handleSearch(); }} 
+              className="text-blue-900 hover:text-blue-700 hover:underline font-medium whitespace-nowrap"
+            >
+              Porsche
+            </button>
+            <span className="text-gray-400">•</span>
+            <button 
+              onClick={() => { setMake("any"); setBodyType("SUV"); setBudget("any"); handleSearch(); }} 
+              className="text-blue-900 hover:text-blue-700 hover:underline font-medium whitespace-nowrap"
+            >
+              SUV
+            </button>
+            <span className="text-gray-400">•</span>
+            <button 
+              onClick={() => { setMake("any"); setBodyType("any"); setBudget("1500000-2000000"); handleSearch(); }} 
+              className="text-blue-900 hover:text-blue-700 hover:underline font-medium whitespace-nowrap"
+            >
+              KSH 500k – KSH 10M
+            </button>
           </div>
         </motion.div>
       </div>

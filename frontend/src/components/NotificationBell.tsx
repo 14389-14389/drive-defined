@@ -56,7 +56,7 @@ const NotificationBell: React.FC = () => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className="relative h-10 w-10">
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
             <Badge
@@ -68,7 +68,11 @@ const NotificationBell: React.FC = () => {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-80 p-0" align="end">
+      <PopoverContent 
+        className="w-[calc(100vw-2rem)] sm:w-80 p-0 mx-4 sm:mx-0" 
+        align="end"
+        sideOffset={8}
+      >
         <div className="flex items-center justify-between p-4 border-b">
           <h3 className="font-semibold">Notifications</h3>
           <div className="flex gap-1">
@@ -77,9 +81,7 @@ const NotificationBell: React.FC = () => {
                 variant="ghost"
                 size="icon"
                 className="h-8 w-8"
-                onClick={() => {
-                  markAllAsRead();
-                }}
+                onClick={markAllAsRead}
               >
                 <CheckCheck className="h-4 w-4" />
               </Button>
@@ -89,9 +91,7 @@ const NotificationBell: React.FC = () => {
                 variant="ghost"
                 size="icon"
                 className="h-8 w-8"
-                onClick={() => {
-                  clearAll();
-                }}
+                onClick={clearAll}
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
@@ -99,7 +99,7 @@ const NotificationBell: React.FC = () => {
           </div>
         </div>
 
-        <ScrollArea className="h-[400px]">
+        <ScrollArea className="h-[300px] sm:h-[400px]">
           {notifications.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full py-8 text-center text-muted-foreground">
               <Bell className="h-8 w-8 mb-2 opacity-50" />
@@ -111,14 +111,10 @@ const NotificationBell: React.FC = () => {
                 <div
                   key={notification.id}
                   className={cn(
-                    "relative p-4 hover:bg-muted/50 transition-colors",
+                    "relative p-4 hover:bg-muted/50 transition-colors cursor-pointer",
                     !notification.read && "bg-muted/30"
                   )}
-                  onClick={() => {
-                    if (!notification.read) {
-                      markAsRead(notification.id);
-                    }
-                  }}
+                  onClick={() => !notification.read && markAsRead(notification.id)}
                 >
                   <div className="flex gap-3">
                     <div className="flex-shrink-0 mt-0.5">
@@ -139,13 +135,13 @@ const NotificationBell: React.FC = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6 opacity-0 group-hover:opacity-100"
+                      className="h-7 w-7 text-muted-foreground hover:text-foreground"
                       onClick={(e) => {
                         e.stopPropagation();
                         clearNotification(notification.id);
                       }}
                     >
-                      <X className="h-3 w-3" />
+                      <X className="h-4 w-4" />
                     </Button>
                   </div>
                   {!notification.read && (
@@ -162,10 +158,8 @@ const NotificationBell: React.FC = () => {
             <Button
               variant="ghost"
               size="sm"
-              className="w-full text-xs"
-              onClick={() => {
-                markAllAsRead();
-              }}
+              className="w-full text-xs h-9"
+              onClick={markAllAsRead}
             >
               Mark all as read
             </Button>
